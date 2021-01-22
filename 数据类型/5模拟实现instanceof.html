@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script>
+			function myInstanceof(left, right) {
+				if (typeof left !== 'object' || left === null) return false
+
+				let proto = Object.getPrototypeOf(left)
+
+				while (true) {
+					if (proto === null) return false
+
+					if (proto === right.prototype) return true
+
+					proto = Object.getPrototypeof(proto)
+				}
+			}
+
+			console.log(myInstanceof(new Number(123), Number))
+			console.log(myInstanceof(123, Number))
+		</script>
+	</head>
+	<body></body>
+</html>

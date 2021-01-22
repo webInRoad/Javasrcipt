@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script>
+			let a = {
+				name: 'Julia',
+				age: 20
+			}
+			function change(o) {
+				o.age = 24
+				o = {
+					name: 'Kath',
+					age: 30
+				}
+				return o
+			}
+			let b = change(a)
+			console.log(b.age) // 30
+			console.log(a.age) // 24
+		</script>
+	</head>
+	<body></body>
+</html>

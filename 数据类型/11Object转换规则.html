@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script>
+			// 对象转换的规则，会先调用内置的 [ToPrimitive] 函数，其规则逻辑如下：
+
+			// 如果部署了 Symbol.toPrimitive 方法，优先调用再返回；
+
+			// 调用 valueOf()，如果转换为基础类型，则返回；
+
+			// 调用 toString()，如果转换为基础类型，则返回；
+
+			// 如果都没有返回基础类型，会报错。
+			var obj = {
+				value: 1,
+
+				valueOf() {
+					return 2
+				},
+
+				toString() {
+					return '3'
+				},
+
+				[Symbol.toPrimitive]() {
+					return 4
+				}
+			}
+
+			console.log(obj + 1)
+
+			10 + {}[(1, 2, undefined, 4, 5)] + 10
+		</script>
+	</head>
+	<body></body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script>
+			console.info('123' == 123) // true
+
+			console.info('' == null) // false
+
+			console.info('' == 0) // true
+
+			console.info([] == 0) // true
+
+			console.info([] == '') // true
+
+			console.info([] == ![]) // true
+
+			console.info(null == undefined) // true
+
+			console.info(Number(null)) // 0
+
+			console.info(Number('')) // 0
+
+			console.info(parseInt('')) //NaN
+
+			console.info({} + 10) //[object Object]10
+
+			let obj = {
+				[Symbol.toPrimitive]() {
+					return 200
+				},
+
+				valueOf() {
+					return 300
+				},
+
+				toString() {
+					return 'Hello'
+				}
+			}
+
+			console.log(obj + 200) // 400
+		</script>
+	</head>
+	<body></body>
+</html>

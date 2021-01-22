@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script>
+			function getType(obj) {
+				let type = typeof obj
+
+				if (type !== 'object') {
+					return type
+				}
+
+				return Object.prototype.toString
+					.call(obj)
+					.replace(/^\[object (\S+)\]$/, '$1')
+			}
+			console.log(getType([])) // Array
+
+			console.log(getType('123')) // string
+
+			console.log(getType(window)) // Window
+
+			console.log(getType(null)) // Null
+
+			console.log(getType(undefined)) // undefined
+
+			console.log(getType()) // undefined
+
+			console.log(getType(function () {})) // function
+
+			console.log(getType(/123/g)) // RegExp
+		</script>
+	</head>
+	<body></body>
+</html>
