@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script>
+			let obj1 = { a: 1, b: [1, 2, 3] }
+			let str = JSON.stringify(obj1)
+			let obj2 = JSON.parse(str)
+			console.info(obj2)
+			obj2.a = 99
+			obj2.b.push(55)
+			console.info(JSON.stringify(obj1), 'obj1') //{"a":1,"b":[1,2,3]} obj1
+			console.info(JSON.stringify(obj2), 'obj2') //{"a":99,"b":[1,2,3,55]} obj2
+		</script>
+	</head>
+	<body></body>
+</html>

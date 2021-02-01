@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script>
+			const shallowClone = (target) => {
+				if (typeof target == 'object' && target != 'null') {
+					var newTarget = Array.isArray(target) ? [] : {}
+					for (var prop in target) {
+						if (target.hasOwnProperty(prop)) {
+							newTarget[prop] = target[prop]
+						}
+					}
+					return newTarget
+				} else {
+					return target
+				}
+			}
+			const obj = { a: 2, d: { name: '张三' } }
+			const newObj = shallowClone(obj)
+			newObj.a = 33
+			newObj.d.name = '李四'
+			console.info(JSON.stringify(newObj), 'newObj')
+			// {"a":33,"d":{"name":"李四"}} newObj
+			console.info(JSON.stringify(obj), 'obj')
+			// {"a":2,"d":{"name":"李四"}} obj
+
+			let v1 = 'string1'
+			let v2 = shallowClone(v1)
+			v2 = 'string2'
+			console.info('v1:', v1) // v1: string1
+			console.info('v2:', v2) //v2: string2
+		</script>
+	</head>
+	<body></body>
+</html>

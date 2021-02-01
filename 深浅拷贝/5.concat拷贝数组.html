@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script>
+			// concat只能用于数组类型对象
+			let arr = [1, 2, 3, { a: 55 }]
+			let newArr = arr.concat()
+			newArr[1] = 200
+			newArr[3]['a'] = 33 //会影响
+			newArr.push(1000)
+			console.info(newArr)
+			console.info(arr)
+		</script>
+	</head>
+	<body></body>
+</html>
