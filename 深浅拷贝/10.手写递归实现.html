@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script>
+			function deepClone(target) {
+				let cloneObj = {}
+				for (let key in target) {
+					if (typeof target[key] == 'object') {
+						cloneObj[key] = deepClone(target[key]) //递归
+					} else {
+						cloneObj[key] = target[key]
+					}
+				}
+				return cloneObj
+			}
+			// let obj1 = {
+			// 	a: 2
+			// }
+			// let obj2 = deepClone(obj1)
+			// obj2.a = 55
+			// console.info('obj2:', obj2) // {a:55}
+			// console.info('obj1:', obj1) // {a:2}
+
+			// let newObj1 = {
+			// 	a: { b: 22 }
+			// }
+			// let newObj2 = deepClone(newObj1)
+			// newObj2.a.b = 55
+			// console.info('newObj2:', newObj2) // { a: { b: 55 } }
+			// console.info('newObj1:', newObj1) // { a: { b: 22 } }
+
+			// 对各种属性类型做验证
+			// let newObj1 = {
+			// 	a: { b: 22 },
+			// 	fun1: function () {
+			// 		//函数可以拷贝
+			// 		console.info(22)
+			// 	},
+			// 	und: undefined, // undefined的正常
+			// 	sym: Symbol(2), // symbol正常
+			// 	date: new Date(), //变成字符串
+			// 	reg: new RegExp(/\s+/), //变成空对象
+			// 	nan: NaN, // 正常
+			// 	inf: Infinity // 正常
+			// }
+			// Object.defineProperty(newObj1, 'enumeration', {
+			// 	enumerable: false, // 不可枚举的属性拷贝不了
+			// 	value: '枚举'
+			// })
+			// let newObj2 = deepClone(newObj1)
+			// newObj2.a.b = 55
+			// console.info('newObj2:', newObj2) // { a: { b: 55 } }
+			// console.info('newObj1:', newObj1) // { a: { b: 22 } }
+
+			// let arr1 = [1, 2, 3]
+			// let arr2 = deepClone(arr1) //返回的是{0: 1, 1: 2, 2: 3}
+			// arr2.push(33) //因为是非数组对象，所以报错
+			// console.info(arr1, arr2)
+		</script>
+	</head>
+	<body></body>
+</html>

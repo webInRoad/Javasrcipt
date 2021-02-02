@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script>
+			let triangle = {
+				a: 1,
+				b: 2,
+				c: 3
+			}
+
+			function coloTriangle() {
+				this.color = 'red'
+			}
+
+			coloTriangle.prototype = triangle
+			let color = new coloTriangle()
+			Object.defineProperty(color, 'auto', {
+				//通过defineProperty定义的属性就是不可枚举的
+				value: 'auto2'
+			})
+			let symbolProp = Symbol('symbol')
+			color[symbolProp] = 'symbol'
+			/* 
+        1.只能自身
+        2.不管枚举不枚举都能遍历
+        3.支持获取symbol类型属性
+      */
+			console.info(Reflect.ownKeys(color)) // ['color','auto',Symbol(symbol)]
+
+			/* 
+        1.只能自身
+        2.不管枚举不枚举都能遍历
+        3.获取不到symbol类型属性
+      */
+			console.info(Object.getOwnPropertyNames(color)) // ['color','auto']
+
+			/* 
+        1.只能自身
+        2.不管枚举不枚举都能遍历
+        3.只能拿到symbol类型属性
+      */
+			console.info(Object.getOwnPropertySymbols(color)) // [Symbol(symbol)]
+
+			/* 
+        1.只能自身
+        2.要枚举才可以
+        3.获取不到symbol类型属性
+      */
+			console.info(Object.keys(color)) //["color"]
+
+			/* 
+        1.不单单自身，包含原型链
+        2.要枚举才可以
+        3.获取不到symbol类型属性
+      */
+			for (let i in color) {
+				console.info(i) // color a b c
+			}
+		</script>
+	</head>
+	<body></body>
+</html>
