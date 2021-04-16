@@ -23,7 +23,6 @@ promise
 		(value) => console.log(value),
 		(reason) => console.log(reason, 'result')
 	)
-
 console.info(232323)
 // 这个时候将promise定义一个p1，然后返回的时候返回p1这个promise
 // const p1 = promise.then((value) => {
