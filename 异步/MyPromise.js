@@ -6,7 +6,6 @@ const REJECTED = 'rejected'
 // 新建 MyPromise 类
 class MyPromise {
 	constructor(executor) {
-		debugger
 		// console.info(executor, 'executor')
 		// executor 是一个执行器，进入会立即执行
 		// 并传入resolve和reject方法
@@ -64,7 +63,6 @@ class MyPromise {
 
 	// 更改成功后的状态
 	resolve = (value) => {
-		debugger
 		// console.info(value, 'value')
 		// 只有状态是等待，才执行状态修改
 		if (this.status === PENDING) {
@@ -77,7 +75,6 @@ class MyPromise {
 			// this.onFulfilledCallback && this.onFulfilledCallback(value)
 
 			// resolve里面将所有成功的回调拿出来执行
-			debugger
 			while (this.onFulfilledCallbacks.length) {
 				// Array.shift() 取出数组第一个元素，然后（）调用，shift不是纯函数，取出后，数组将失去该元素，直到数组为空
 				this.onFulfilledCallbacks.shift()(value)
@@ -104,9 +101,9 @@ class MyPromise {
 	then(onFulfilled, onRejected) {
 		debugger
 		// 如果不传，就使用默认函数
-		onFulfilled =
+		const realOnFulfilled =
 			typeof onFulfilled === 'function' ? onFulfilled : (value) => value
-		onRejected =
+		const realOnRejected =
 			typeof onRejected === 'function'
 				? onRejected
 				: (reason) => {
@@ -118,72 +115,56 @@ class MyPromise {
 		const promise2 = new MyPromise((resolve, reject) => {
 			// console.info(resolve, 'resolve')
 			// console.info(reject, 'reject')
-			// 这里的内容在执行器中，会立即执行
-			if (this.status === FULFILLED) {
-				// ==== 新增 ====
+			const fulfilledMicrotask = () => {
 				// 创建一个微任务等待 promise2 完成初始化
 				queueMicrotask(() => {
 					try {
 						// 获取成功回调函数的执行结果
-						const x = onFulfilled(this.value)
-						// console.info(x, 'x')
+						const x = realOnFulfilled(this.value)
 						// 传入 resolvePromise 集中处理
 						resolvePromise(promise2, x, resolve, reject)
 					} catch (error) {
 						reject(error)
 					}
 				})
-			} else if (this.status === REJECTED) {
+			}
+
+			const rejectedMicrotask = () => {
 				// 创建一个微任务等待 promise2 完成初始化
 				queueMicrotask(() => {
 					try {
 						// 调用失败回调，并且把原因返回
-						console.info(this.reason, 'this.reason')
-						const x = onRejected(this.reason)
-						console.info(x, 'x23')
+						const x = realOnRejected(this.reason)
 						// 传入 resolvePromise 集中处理
 						resolvePromise(promise2, x, resolve, reject)
 					} catch (error) {
-						console.info(error, 'erro2323')
 						reject(error)
 					}
 				})
+			}
+			// 这里的内容在执行器中，会立即执行
+			if (this.status === FULFILLED) {
+				// ==== 新增 ====
+				// 创建一个微任务等待 promise2 完成初始化
+				fulfilledMicrotask()
+			} else if (this.status === REJECTED) {
+				// 创建一个微任务等待 promise2 完成初始化
+				rejectedMicrotask()
 			} else if (this.status === PENDING) {
-				this.onFulfilledCallbacks.push(() => {
-					queueMicrotask(() => {
-						try {
-							// 获取成功回调函数的执行结果
-							const x = onFulfilled(this.value)
-							// console.info(x, 'x')
-							// 传入 resolvePromise 集中处理
-							resolvePromise(promise2, x, resolve, reject)
-						} catch (error) {
-							reject(error)
-						}
-					})
-				})
-				this.onRejectedCallbacks.push(() => {
-					queueMicrotask(() => {
-						try {
-							// 调用失败回调，并且把原因返回
-							const x = onRejected(this.reason)
-							// console.info(x, 'x')
-							// 传入 resolvePromise 集中处理
-							resolvePromise(promise2, x, resolve, reject)
-						} catch (error) {
-							reject(error)
-						}
-					})
-				})
+				this.onFulfilledCallbacks.push(fulfilledMicrotask)
+				this.onRejectedCallbacks.push(rejectedMicrotask)
 			}
 		})
 
 		return promise2
 	}
+
+	catch(onRejected) {
+		return this.then(null, onRejected)
+	}
 }
 
 function resolvePromise(promise2, x, resolve, reject) {
-	debugger
 	// 如果相等了，说明return的是自己，抛出类型错误并返回
 	if (promise2 === x) {
 		return reject(
@@ -198,8 +179,8 @@ function resolvePromise(promise2, x, resolve, reject) {
 		x.then(resolve, reject)
 	} else {
 		// 普通值
-		console.info(x, 'x')
-		resolve(x)
+		// console.info(x, 'x')
+		// resolve(x)
 	}
 }
 

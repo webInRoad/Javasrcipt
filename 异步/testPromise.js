@@ -12,18 +12,18 @@
 // 	.then()
 // 	.then((value) => console.log(value))
 
-const promise = new MyPromise((resolve, reject) => {
-	reject('err')
-})
+// const promise = new MyPromise((resolve, reject) => {
+// 	reject('err')
+// })
 
-promise
-	.then()
-	.then()
-	.then(
-		(value) => console.log(value),
-		(reason) => console.log(reason, 'result')
-	)
-console.info(232323)
+// promise
+// 	.then()
+// 	.then()
+// 	.then(
+// 		(value) => console.log(value),
+// 		(reason) => console.log(reason, 'result')
+// 	)
+// console.info(232323)
 // 这个时候将promise定义一个p1，然后返回的时候返回p1这个promise
 // const p1 = promise.then((value) => {
 // 	console.log(1)
@@ -69,3 +69,39 @@ console.info(232323)
 // 		console.log(2)
 // 		console.log('resolve', value)
 // 	})
+// MyPromise.resolve()
+// 	.then(() => {
+// 		console.log(0) // 0
+// 		return MyPromise.resolve(4)
+// 	})
+// 	.then((res) => {
+// 		console.log(res, 'res')
+// 	})
+
+MyPromise.resolve()
+	.then(() => {
+		console.log(1)
+		throw new Error('2323')
+	})
+	.catch((err) => {
+		console.info(err, 'err')
+	})
+	.then(
+		() => {
+			console.log(2)
+		},
+		(err) => {
+			console.info(err, 'err')
+		}
+	)
+	.then(() => {
+		console.log(3)
+	})
+	.then(() => {
+		console.log(5)
+	})
+	.then(() => {
+		console.log(6)
+	})
+// const a = new MyPromise(console.info(3))
+// a.then(() => console.info(55))
