@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script>
+			function User() {}
+			console.info(User)
+			console.dir(User) // 存在两个原型:prototype与__proto__
+			// 函数作为对象,__proto__服务于User对象自己，跟其他对象一致
+			User.call()
+			User.__proto__.speak = function () {
+				console.info('speak')
+			}
+			User.speak() //speak
+
+			// 函数作为构造函数，prototype是服务于实例化对象，比如let u = new User里的u
+			let u = new User()
+			// u.speak() //Uncaught TypeError: u.speak is not a function
+			User.prototype.speak = function () {
+				console.info('user speak')
+			}
+			u.speak() //user speak
+			console.info(u.__proto__ == User.prototype) // true
+		</script>
+	</head>
+	<body></body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script>
+			let zhangsan = { name: 'zhangsan' }
+			console.info(zhangsan.__proto__)
+			console.dir(zhangsan.__proto__)
+			console.info(zhangsan.hasOwnProperty('name')) // true
+			// 完全数据字面量，没有原型存在的对象
+			let lisi = Object.create(null, {
+				name: 'lisi'
+			})
+			console.info(lisi.hasOwnProperty('name')) //报错
+		</script>
+	</head>
+	<body></body>
+</html>
