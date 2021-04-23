@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script>
+			// js自带的构造函数：String,Number,Object
+			let cat = new Object()
+			cat.name = 'miaomiao'
+			console.info(cat)
+			console.dir(cat)
+			console.dir(Object) //Object是个构造函数，所以也会有__proto__与prototype
+			Object.prototype.show = function () {
+				console.info('show')
+			}
+			cat.show()
+
+			//原型链
+			function User() {}
+			console.dir(User)
+			console.dir(User.__proto__.prototype) // undefined
+			console.dir(User.prototype.prototype) // undefined
+			// 上面两个console结果，说明对象只有__proto__,并没有prototype
+			console.dir(cat.__proto__.prototype) // undefined
+			console.info(User.__proto__.__proto__ == Object.prototype)
+			console.info(User.prototype.__proto__ == Object.prototype) // true
+			console.info(User.prototype.__proto__ == User.__proto__.__proto__) //true，说明User的两个原型都指向了Object.property
+			console.dir(Object.prototype.__proto__) //null，到顶层了
+			console.dir(Object.__proto__.__proto__ == Object.prototype) //true，任何对象的原型最终都指向Object.prototype
+			// 继承
+			const user = new User()
+			user.show() // show,一路向上找，找到Object.prototype上
+		</script>
+	</head>
+	<body></body>
+</html>

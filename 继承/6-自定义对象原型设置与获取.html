@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script>
+			const child = { name: 'xiaotou' }
+			const parent = { name: 'datou' }
+			// console.info(child.__proto__ == Object.prototype) //默认对象__proto__的原型为Object.prototype
+			Object.setPrototypeOf(child, parent)
+			console.info(child.__proto__ == Object.prototype) // false
+			console.dir(child)
+			console.info(Object.getPrototypeOf(child))
+		</script>
+	</head>
+	<body></body>
+</html>

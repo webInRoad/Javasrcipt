@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script>
+			Array.prototype.show = function () {
+				console.info('show')
+			}
+			let array = [] // new Array
+			console.info(array.__proto__ == Array.prototype)
+			console.dir(Array)
+			console.info(Array.prototype.__proto__ == Object.prototype)
+			console.info(Array.__proto__.__proto__ == Object.prototype)
+			array.show()
+			let str = '123' // new String
+			console.info(str.__proto__ == String.prototype)
+			console.info(String.prototype.__proto__ == Object.prototype)
+			console.info(String.__proto__.__proto__ == Object.prototype)
+
+			let bool = true // new Boolean
+			console.info(bool.__proto__ == Boolean.prototype)
+
+			let reg = /a/i //new RegExp
+			console.info(reg.__proto__ == RegExp.prototype)
+
+			let obj = {} // new Object
+			console.info(obj.__proto__ == Object.prototype)
+		</script>
+	</head>
+	<body></body>
+</html>
