@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script>
+			function User(name) {
+				this.name = name
+			}
+			// User.prototype.show = function () {
+			// 	console.info('show')
+			// }
+			User.prototype = {
+				//相当于指定了个新的对象，所以要手动定义constructor
+				constructor: User,
+				show() {
+					console.info('show')
+				}
+			}
+			// console.dir(User)
+			// console.info(User.prototype.__proto__ == Object.prototype)
+			// console.info(User.prototype.constructor == User)
+			let lisi = new User.prototype.constructor('list')
+			// console.info(lisi)
+			lisi.show()
+		</script>
+	</head>
+	<body></body>
+</html>
