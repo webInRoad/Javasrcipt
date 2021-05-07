@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script>
+			function Parent(name, colors) {
+				this.name = name
+				this.colors = colors
+			}
+			Parent.prototype.sports = ['basketball']
+			function Child(name, colors) {
+				Parent.call(this, name, colors)
+			}
+			Child.prototype = Object.create(Parent.prototype)
+			Child.prototype.constructor = Child
+
+			var child1 = new Child('child1', ['pink'])
+			child1.colors.push('blue')
+			child1.sports.push('football')
+			var child2 = new Child('child2', ['black'])
+			child2.sports = ['badminton']
+
+			console.info(child1) // Child {name: "child1", colors: ["pink", "blue"]}
+			console.info(child2) // Child {name: "child2", colors: ["black"], sports: ["badminton"]}
+		</script>
+	</head>
+	<body></body>
+</html>

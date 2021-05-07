@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script>
+			function create(o) {
+				function F() {}
+				F.prototype = o
+				return new F()
+			}
+			var person = {
+				name: '张三',
+				colors: ['pink', 'blue'],
+				say() {
+					console.info('hello')
+				}
+			}
+
+			var student = create(person)
+			student.name = '小明'
+			student.colors.push('yellow')
+			student.say = function () {
+				console.info('ok')
+			}
+			var teacher = create(person)
+			teacher.name = '夏老师'
+			teacher.colors.push('green')
+			console.info(student) // F {name: "小明"}
+			console.info(teacher) // F {name: "夏老师"}
+			console.info(teacher.colors) // ["pink", "blue", "yellow", "green"]
+			student.say()
+		</script>
+	</head>
+	<body></body>
+</html>

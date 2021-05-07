@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script>
+			// function Animal() {
+			// 	this.species = '动物'
+			// }
+			function Cat(name, color) {
+				this.name = name
+				this.color = color
+			}
+			// 1、构造函数绑定
+			// function Cat(name, color) {
+			// 	Animal.apply(this, arguments) // 使用call或apply方法
+			// 	this.name = name
+			// 	this.color = color
+			// }
+			// var cat1 = new Cat('大毛', '黄色')
+			// alert(cat1.species) // 动物
+
+			// 2、prototype模式
+			// Cat.prototype = new Animal()
+			// Cat.prototype.constructor = Cat
+			// var cat1 = new Cat('大毛', '黄色')
+			// console.dir(cat1)
+			// alert(cat1.species) // 动物
+			// alert(Cat.prototype.constructor == Animal) //true
+
+			// 3、直接继承prototype
+			function Animal() {}
+			Animal.prototype.species = '动物'
+			Cat.prototype = Animal.prototype
+			Cat.prototype.constructor = Cat
+			var cat1 = new Cat('大毛', '黄色')
+			alert(cat1.species) // 动物
+			console.dir(Animal.prototype.constructor)
+		</script>
+	</head>
+	<body></body>
+</html>

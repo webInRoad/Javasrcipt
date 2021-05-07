@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>3-组合继承-总结-缺点</title>
+		<script>
+			function Parent(name) {
+				console.info(name)
+				this.name = name
+			}
+			function Child(name) {
+				Parent.call(this, name)
+			}
+			Child.prototype = new Parent()
+			Child.prototype.constructor = Child
+
+			var child1 = new Child('child1')
+			console.info(child1)
+			console.info(Child.prototype)
+
+			//  结果为：
+			// undefined
+			// child1
+
+			// Child {name:'child1'}
+			// Parent {name:'undefined',constructor:f Child(name){}}
+		</script>
+	</head>
+	<body></body>
+</html>

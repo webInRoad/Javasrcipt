@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script>
+			function Parent(name) {
+				this.name = name
+			}
+			Parent.prototype.getInfo = function () {
+				console.info(this.name)
+			}
+			function Child(name) {
+				this.sex = 'boy'
+				Parent.call(this, name)
+			}
+			// 与组合继承的差别
+			Child.prototype = Object.create(Parent.prototype)
+			Child.prototype.constructor = Child
+			var child1 = new Child('child1')
+			console.info(child1) // Child {sex: "boy", name: "child1"}
+			child1.getInfo() // child1
+			console.info(child1.__proto__) // Parent {}
+		</script>
+	</head>
+	<body></body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>原型链继承</title>
+	</head>
+	<body></body>
+	<script>
+		function Parent(name) {
+			this.name = name
+			this.sex = 'boy'
+			this.colors = ['white', 'black']
+		}
+		function Child() {
+			this.feature = ['cute']
+		}
+		var parent = new Parent('parent')
+		Child.prototype = parent
+
+		var child1 = new Child('child1')
+		child1.sex = 'girl'
+		child1.colors.push('yellow')
+		child1.feature.push('sunshine')
+
+		var child2 = new Child('child2')
+
+		console.log(child1)
+		console.log(child2)
+
+		console.log(child1.name)
+		console.log(child2.colors)
+
+		console.log(parent)
+	</script>
+</html>
